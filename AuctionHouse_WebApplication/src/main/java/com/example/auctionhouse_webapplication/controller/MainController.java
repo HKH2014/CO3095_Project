@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-    @RequestMapping("/greet")
+    @RequestMapping("/")
     public String greetWorld(Model model) {
-        model.addAttribute("name", "World");
-        return "greeting";
+//        model.addAttribute("name", "World");
+        return "mainPage";
     }
 }

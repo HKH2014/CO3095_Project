@@ -4,6 +4,6 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<h2>Hello, ${name}!</h2>
+<h2>This is a test</h2>
 </body>
 </html>
