@@ -5,9 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AddListingController {
-    @GetMapping("/AddListingsPage")
-    public String addList(Model model) {
-        return "AddListingsPage";
+public class CreateBuyerController {
+    @GetMapping("/ViewListings")
+    public String viewList(Model model) {
+        return "ViewListings";
     }
 }
