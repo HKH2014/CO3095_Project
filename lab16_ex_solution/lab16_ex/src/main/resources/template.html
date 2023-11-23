@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lab 10: Tasks for agent $username</title>
+</head>
+
+<body>
+<h1>Lab 10: Tasks for agent $username</h1>
+
+<p>All IT systems of MI-6 have been compromised. Her Majesty's agents are at risk.</p>
+<center><a href="https://www.thesun.co.uk/news/1831866/mi6-job-how-to-apply-money-who-can/" target="_blank"><img alt="" src="src/main/resources/static/motivation.webp" width="500"/></a></center> 
+<p>Your task is to develop a new secret agent management system for MI-6. You have less than 2h to complete your work.</p>
+<p>Don't work with anyone else on this. Don't share any information. You may only trust some of the TAs.</p>
+
+<h2>Task 1: Configuration</h2>
+<p>Configure the project to support the use of JSPs as view technology. JSPs must be configured to be placed inside folder <code>src/main/webapp/WEB-INF/views/</code>.</p>
+
+<h2>Task 2: Domain Classes</h2>
+
+<p>Create class <code>com.example.lab10_ex.domain.Agent</code>. With the following private fields:</p>
+<ol>
+  <li><code>int id</code></li>
+  <li><code>String name</code></li>
+  <li><code>String country</code></li>
+</ol>
+<p>
+Generate necessary getters and setters.
+</p>
+
+<h2>Task 3: Controller (simple)</h2>
+<p>Create controller <code>com.example.lab10_ex.controller.MainController</code>.</p>
+<ol>
+  <li>Requests for URL <code>"/"</code> (POST and GET) should show the view <code>start</code> (the corresponding JSP already exists).</li>
+</ol>
+
+
+<h2>Task 4: Controller, View, and Form</h2>
+
+<p>Create field <code>public static List&lt;Agent&gt; agents</code> in class <code>com.example.lab10_ex.Lab10Application</code>. Initialize the list to contain two agents.</p>
+
+<p>Create controller <code>com.example.lab10_ex.controller.AgentController</code> and add methods with request mappings for the following behavior:</p>
+<ol>
+  <li>GET requests for URL <code>"/agents"</code> should show view <code>agents/list</code>.
+    <ul>
+      <li>Add the list of all agents from <code>com.example.lab10_ex.Lab10Application</code> to the model as attribute <code>agents</code>.</li>
+      <li>Create the corresponding JSP to list the name and country of each agent followed by a link to URL <code>"/terminate?agent={id}"</code>, e.g., <code>"/terminate?agent=3"</code>.</li>
+    </ul>
+  </li>
+  <li>Requests for URL <code>"/newAgent"</code> should show view <code>agents/form</code>. Create the corresponding JSP with a form with <code>modelAttribute="agent"</code> and <code>action="/addAgent"</code> and inputs for all fields of class <code>Agent</code>.</li>
+  <li>POST requests for URL <code>"/addAgent"</code> should add a new agent to the list of all agents in <code>com.example.lab10_ex.Lab10Application</code> and redirect to <code>/agents</code>.</li>
+</ol>
+
+
+<h2>Task 5: GET Requests</h2>
+<p>Extend controller <code>com.example.lab10_ex.controller.AgentController</code> and add methods with request mappings for the following behavior:</p>
+<ol>
+<li>GET requests for URL <code>"/terminate"</code> with request parameter <code>agent={id}</code> should delete the agent with the corresponding ID from the list of all agents in <code>com.example.lab10_ex.Lab10Application</code> and redirect to <code>/agents</code>.</li>
+</ol>
+
+<h2>Task 6: Validation</h2>
+
+<p>Set up a validator for class <code>Agent</code> and make it available in controller <code>AgentController</code>.</p>
+<p>When adding a new agent validate that
+  <ol>
+    <li>The value of field <code>id</code> is unique within the list <code>Lab10Application.agents</code>.</li>
+    <li>The value of field <code>name</code> is not empty.</li>
+    <li>The value of field <code>country</code> is different from "UK" (MI-6 deploy agents only in foreign countries).</li>
+  </ol>
+  In case of validation errors go back to the form and show error messages for each field in the form.
+</p>
+
+</body>
+
+</html>
