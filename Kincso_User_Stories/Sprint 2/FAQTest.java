@@ -13,8 +13,6 @@ public class FAQTest {
         List<Map<String, Object>> filteredList = FAQ.filterByTopic(1);
 
         assertEquals(2, filteredList.size());
-
-        // Add more assertions as needed
     }
 
     @Test
@@ -24,8 +22,6 @@ public class FAQTest {
         List<Map<String, Object>> filteredList = FAQ.filterByPriority(2);
 
         assertEquals(1, filteredList.size());
-
-        // Add more assertions as needed
     }
 
     @Test
@@ -36,7 +32,6 @@ public class FAQTest {
 
         assertEquals(1, filteredList.size());
 
-        // Add more assertions as needed
     }
 
     @Test
@@ -47,7 +42,6 @@ public class FAQTest {
 
         assertEquals(testQanda.size(), filteredList.size());
 
-        // Add more assertions as needed
     }
 
     @Test
@@ -75,16 +69,10 @@ public class FAQTest {
 
         assertEquals(currentStateBeforeUndo - 1, currentStateAfterUndo);
 
-        // Add more assertions as needed
     }
 
     @Test
     void printFAQDetails() {
-        // This is a void method that prints to the console.
-        // To test it, you may need to redirect System.out to check the output.
-        // Alternatively, you can modify the method to return a string and test that.
-
-        // For demonstration purposes, we can test by checking if the method throws any exceptions
         assertDoesNotThrow(() -> FAQ.printFAQDetails(createTestQanda().get(0)));
     }
 
