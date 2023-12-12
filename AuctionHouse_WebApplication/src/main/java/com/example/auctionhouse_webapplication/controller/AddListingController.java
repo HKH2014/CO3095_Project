@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AddListingController {
     @GetMapping("/AddListingsPage")
     public String addList(Model model) {
-        return "AddListingsPage";
+        return "AddListingPage";
     }
 }
