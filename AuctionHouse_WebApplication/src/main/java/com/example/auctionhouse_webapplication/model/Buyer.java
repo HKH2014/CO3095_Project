@@ -1,27 +1,15 @@
 package com.example.auctionhouse_webapplication.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
-
 @Entity
-public class Buyer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Buyer extends User {
 
     @OneToMany(mappedBy = "bidder")
     private List<Bid> bids;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public List<Bid> getBids() {
         return bids;

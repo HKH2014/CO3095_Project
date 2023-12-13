@@ -5,22 +5,10 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class Seller {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Seller extends User {
 
     @OneToMany(mappedBy = "seller")
     private List<Auction> auctions;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public List<Auction> getAuctions() {
         return auctions;
