@@ -15,15 +15,13 @@ public class Bid {
 
     @ManyToOne
     @JoinColumn(name = "bidder_id")
-    private Buyer bidder;
-
-    private double bid;
+    private User bidder;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -31,23 +29,15 @@ public class Bid {
         return auction;
     }
 
-    public void setAuction(Auction auction) {
+    public void setAuction(final Auction auction) {
         this.auction = auction;
     }
 
-    public Buyer getBidder() {
+    public User getBidder() {
         return bidder;
     }
 
-    public void setBidder(Buyer bidder) {
+    public void setBidder(final User bidder) {
         this.bidder = bidder;
-    }
-
-    public double getBid() {
-        return bid;
-    }
-
-    public void setBid(double bid) {
-        this.bid = bid;
     }
 }

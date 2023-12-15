@@ -20,17 +20,16 @@ public class Auction {
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
-    private Seller seller;
+    private User seller;
 
     @OneToMany(mappedBy = "auction")
     private List<Bid> bids;
-
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -38,7 +37,7 @@ public class Auction {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -46,7 +45,7 @@ public class Auction {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -54,7 +53,7 @@ public class Auction {
         return basePrice;
     }
 
-    public void setBasePrice(double basePrice) {
+    public void setBasePrice(final double basePrice) {
         this.basePrice = basePrice;
     }
 
@@ -62,7 +61,7 @@ public class Auction {
         return minBet;
     }
 
-    public void setMinBet(double minBet) {
+    public void setMinBet(final double minBet) {
         this.minBet = minBet;
     }
 
@@ -70,15 +69,15 @@ public class Auction {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(final LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
-    public Seller getSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    public void setSeller(Seller seller) {
+    public void setSeller(final User seller) {
         this.seller = seller;
     }
 
@@ -86,7 +85,7 @@ public class Auction {
         return bids;
     }
 
-    public void setBids(List<Bid> bids) {
+    public void setBids(final List<Bid> bids) {
         this.bids = bids;
     }
 }

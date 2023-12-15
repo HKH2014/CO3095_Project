@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 public class CreateSellerController {
@@ -30,13 +29,13 @@ public class CreateSellerController {
 
     @GetMapping("/reports/view")
     public String reports() {
-        return "index";
+        return "index.html";
     }
 
     @RequestMapping("/reports/add")
     public String add(Model model) {
         model.addAttribute("reports",new Report());
-        return "reports";
+        return "reports.html";
     }
 
     @RequestMapping("/reports/save")

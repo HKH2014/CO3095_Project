@@ -5,7 +5,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.example.auctionhouse_webapplication.model.User;
 import java.util.Collection;
-import java.util.List;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -17,7 +16,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getRole().toString()));
+        return user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRole().toString())).toList();
     }
 
     @Override
@@ -50,3 +49,8 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 }
+
+
+
+
+

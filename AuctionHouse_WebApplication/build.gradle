@@ -16,17 +16,25 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.1.2.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'javax.servlet:jstl:1.2'
     implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.7'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
     runtimeOnly 'mysql:mysql-connector-java'
+//    implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.1'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.apache.tomcat.embed:tomcat-embed-jasper:10.1.9'
     runtimeOnly 'javax.servlet:jstl:1.2'
+    implementation group: 'org.webjars', name: 'jquery', version: '3.7.1'
+    implementation group: 'org.webjars', name: 'webjars-locator', version: '0.50'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '3.2.0'
 }
 
 tasks.named('test') {

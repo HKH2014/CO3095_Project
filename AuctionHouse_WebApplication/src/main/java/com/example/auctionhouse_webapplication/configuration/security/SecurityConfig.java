@@ -26,7 +26,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.httpBasic(Customizer.withDefaults())
             .authorizeHttpRequests(
-                auth -> auth.anyRequest().permitAll())
+                auth -> auth.requestMatchers("/", "/login/", "/register").permitAll()
+                    .anyRequest().authenticated())
             .formLogin(Customizer.withDefaults())
             .userDetailsService(userDetailsService)
             .build();

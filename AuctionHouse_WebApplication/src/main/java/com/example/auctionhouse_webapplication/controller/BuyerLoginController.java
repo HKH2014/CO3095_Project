@@ -11,6 +11,6 @@ public class BuyerLoginController {
     @RequestMapping("/userdetails")
     @PreAuthorize("hasAuthority('BUYER')")
     public String UserDetails (Model model){
-        return "UserDetails";
+        return "UserDetails.html";
     }
 }

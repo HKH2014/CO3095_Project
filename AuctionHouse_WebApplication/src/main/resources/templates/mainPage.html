@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <title>Auctionhouse website</title>
+</head>
+
+<body>
+
+<main class="container">
+    <h1 class="display-4">Welcome to Auctionhouse website</h1>
+    <p class="lead">This application is for bidding houses.</p>
+
+    <hr class="my-4">
+    <p>Most features require logging in. Not authorized users have access to the welcome screen and login or registration panel.</p>
+
+    <p>Admin (seller) can:</p>
+    <ul>
+        <li>Create auction and submit minimum bidding amount</li>
+        <li>View list of all users with possibility to delete user</li>
+        <li>View list of all auctions with editing or deleting auction</li>
+    </ul>
+    <p>Common user (buyer) can:</p>
+    <ul>
+        <li>Submit maximum amount of bid.</li>
+        <li>View list of all auctions wirth only bidding allowed.</li>
+    </ul>
+
+    <p>Every authorized user can:</p>
+    <ul>
+        <li>View his own profile</li>
+        <li>View auctions</li>
+
+    </ul>
+
+    <h2 class="my-second-header">Test users:</h2>
+    <ul>
+        <li>user1</li>
+        <li>user2</li>
+
+    </ul>
+</main>
+
+<footer class="footer">
+    <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+</footer>
+
+</body>
+</html>
