@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <title>Register</title>
+
+</head>
+
+<link rel="stylesheet" href="/static/css/flatly/bootstrap.min.css" th:href="@{css/flatly/bootstrap.min.css}"/>
+</head>
+
+<body>
+
+
+<main class="container">
+    <div class="container mt-4">
+        <h2>Auctions List</h2>
+
+        <!-- Sprawdź, czy aukcje istnieją w modelu -->
+        <th:block th:if="${not #lists.isEmpty(auctions)}">
+            <!-- Iteruj przez aukcje w modelu -->
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>End Date</th>
+                            <th>Seller Name</th>
+                            <th>Current Price</th>
+                            <th>Min Bet</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Iteruj przez aukcje w modelu i wyświetl dane -->
+                        <tr th:each="auction : ${auctions}">
+                            <td th:text="${auction.id}"></td>
+                            <td th:text="${auction.name}"></td>
+                            <td th:text="${auction.description}"></td>
+                            <td th:text="${auction.endDate}"></td>
+                            <td th:text="${auction.sellerName}"></td>
+                            <td th:text="${auction.currentPrice}"></td>
+                            <td th:text="${auction.minBet}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </th:block>
+
+        <!-- Komunikat, jeśli nie ma dostępnych aukcji -->
+        <th:block th:if="${#lists.isEmpty(auctions)}">
+            <div class="alert alert-info" role="alert">
+                No auctions available.
+            </div>
+        </th:block>
+    </div>
+</main>
+
+<footer class="footer">
+    <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+</footer>
+
+<!--show description when mouse is over eye icon-->
+<script src="main.js"></script>
+
+</body>
+</html>

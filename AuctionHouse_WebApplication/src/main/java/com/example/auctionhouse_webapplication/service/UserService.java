@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.auctionhouse_webapplication.dto.RegistrationDto;
 import com.example.auctionhouse_webapplication.dto.RegistrationDtoWithRoles;
 import com.example.auctionhouse_webapplication.error.NonUniqueUsernameException;
+import com.example.auctionhouse_webapplication.error.UserRelatedException;
 import com.example.auctionhouse_webapplication.model.Role;
 import com.example.auctionhouse_webapplication.model.RoleEnum;
 import com.example.auctionhouse_webapplication.model.User;
@@ -37,20 +38,21 @@ public class UserService {
 
     public void createWithAdminPrivileges(RegistrationDtoWithRoles registrationDto) {
         List<RoleEnum> roles = new ArrayList<>();
-        if(registrationDto.getIsAdmin()) {
+        if (registrationDto.getIsAdmin()) {
             roles.add(RoleEnum.ADMIN);
         }
-        if(registrationDto.getIsSeller()) {
+        if (registrationDto.getIsSeller()) {
             roles.add(RoleEnum.SELLER);
         }
-        createUserInternal(registrationDto, roles.toArray(new RoleEnum[0]));
+        createUser(registrationDto, roles.toArray(new RoleEnum[0]));
+    }
+
+    User getUserOrThrow(String username) {
+        return userRepository.findByUsername(username)
+            .orElseThrow(() -> new UserRelatedException("User does not exist."));
     }
 
     private void createUser(RegistrationDto registrationDto, RoleEnum... roles) {
-        createUserInternal(registrationDto, roles);
-    }
-
-    private void createUserInternal(RegistrationDto registrationDto, RoleEnum[] roles) {
         assertThatUsernameWouldBeUnique(registrationDto.getUsername());
         final List<Role> roleEntities = Arrays.stream(roles).map(roleService::getRole).toList();
         final User user = mapToUser(registrationDto, roleEntities);

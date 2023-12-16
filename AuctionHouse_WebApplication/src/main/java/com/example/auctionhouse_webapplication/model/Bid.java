@@ -17,6 +17,8 @@ public class Bid {
     @JoinColumn(name = "bidder_id")
     private User bidder;
 
+    private Double bid;
+
     public int getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Bid {
 
     public void setBidder(final User bidder) {
         this.bidder = bidder;
+    }
+
+    public Double getBid() {
+        return bid;
+    }
+
+    public void setBid(final Double bid) {
+        this.bid = bid;
     }
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <title>Register</title>
+
+</head>
+
+<link rel="stylesheet" href="/static/css/flatly/bootstrap.min.css" th:href="@{css/flatly/bootstrap.min.css}"/>
+</head>
+
+<body>
+
+
+<main class="container">
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Create new auction</h1>
+
+        <div class="card card-body">
+
+            <form th:action="@{/auctions/new}" th:object="${auction}" method="post">
+                <div class="row">
+
+                    <div class="col-sm-9">
+
+                        <div class="form-group">
+
+                            <label for="name" class="form-control-label">Name</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control"
+                                       th:field="*{name}" id="name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="form-control-label">Description</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                                    </div>
+                                    <input type="text" class="form-control description my-description-input"
+                                           th:field="*{description}" id="description"/>
+                                    <div class="input-group-append">
+                                    </div>
+                                </div>
+
+
+                                <label for="basePrice" class="form-control-label">Base price</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-at"></i>
+                                    </span>
+                                    </div>
+                                    <input type="number" class="form-control"
+                                           th:field="*{basePrice}" id="basePrice">
+                                </div>
+
+                                <label for="minBet" class="form-control-label">Minimal bet</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-at"></i>
+                                    </span>
+                                    </div>
+                                    <input type="number" class="form-control"
+                                           th:field="*{minBet}" id="minBet">
+                                </div>
+
+
+                                <label for="endDate" class="form-control-label">End date</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                    </div>
+                                    <input type="date" class="form-control"
+                                           th:field="*{endDate}" id="endDate" th:attr="placeholder=#{'dd-MM-yyyyTHH:mm:ss'}">
+                                </div>
+
+
+                            </div>
+
+
+                            <input type="submit" value="Submit" class="btn btn-primary"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+</footer>
+
+<!--show description when mouse is over eye icon-->
+<script src="main.js"></script>
+
+</body>
+</html>

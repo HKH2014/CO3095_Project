@@ -1,8 +1,15 @@
 package com.example.auctionhouse_webapplication.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
-import java.time.LocalDateTime;
+import org.springframework.util.comparator.Comparators;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -16,7 +23,7 @@ public class Auction {
     private String description;
     private double basePrice;
     private double minBet;
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
@@ -24,6 +31,13 @@ public class Auction {
 
     @OneToMany(mappedBy = "auction")
     private List<Bid> bids;
+
+    public double getCurrentPrice() {
+        return bids.stream()
+            .map(Bid::getBid)
+            .max((bid1, bid2) -> Comparators.comparable().compare(bid1, bid2))
+            .orElse(basePrice);
+    }
 
     public int getId() {
         return id;
@@ -65,11 +79,11 @@ public class Auction {
         this.minBet = minBet;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(final LocalDateTime endDate) {
+    public void setEndDate(final LocalDate endDate) {
         this.endDate = endDate;
     }
 
