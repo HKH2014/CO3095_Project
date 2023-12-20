@@ -24,6 +24,7 @@ public class Auction {
     private double basePrice;
     private double minBet;
     private LocalDate endDate;
+    private double maxBid; // Dodane pole
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
@@ -34,9 +35,9 @@ public class Auction {
 
     public double getCurrentPrice() {
         return bids.stream()
-            .map(Bid::getBid)
-            .max((bid1, bid2) -> Comparators.comparable().compare(bid1, bid2))
-            .orElse(basePrice);
+                .map(Bid::getBid)
+                .max((bid1, bid2) -> Comparators.comparable().compare(bid1, bid2))
+                .orElse(basePrice);
     }
 
     public int getId() {
@@ -101,5 +102,14 @@ public class Auction {
 
     public void setBids(final List<Bid> bids) {
         this.bids = bids;
+    }
+
+    // Dodane metody
+    public double getMaxBid() {
+        return maxBid;
+    }
+
+    public void setMaxBid(double maxBid) {
+        this.maxBid = maxBid;
     }
 }

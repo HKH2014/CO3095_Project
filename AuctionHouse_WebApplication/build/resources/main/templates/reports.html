@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reports</title>
+
+</head>
+<body>
+
+<main class="container">
+    <h1>List of Reports</h1>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Report Date</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="report : ${reports}">
+                <td th:text="${report.id}"></td>
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.description}"></td>
+                <td th:text="${report.reportDate}"></td>
+                <td th:text="${report.email}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

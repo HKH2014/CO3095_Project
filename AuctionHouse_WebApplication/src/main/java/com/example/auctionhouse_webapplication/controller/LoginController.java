@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController {
 
+public class LoginController {
     @GetMapping("/login")
-    String showLoginForm() {
-        //login form is submitted using POST method <form th:action="@{/login}" method="post">
+    public String showLoginForm() {
+
         return "login";
     }
 }

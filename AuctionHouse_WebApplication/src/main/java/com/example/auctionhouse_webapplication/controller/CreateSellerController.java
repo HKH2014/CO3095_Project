@@ -2,7 +2,6 @@ package com.example.auctionhouse_webapplication.controller;
 
 import com.example.auctionhouse_webapplication.model.Report;
 import com.example.auctionhouse_webapplication.repo.ReportRepository;
-//import com.example.auctionhouse_webapplication.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class CreateSellerController {
 
-    @Autowired
+
     //Controller -> Service -> Repository
     private ReportRepository reportRepository;
 
