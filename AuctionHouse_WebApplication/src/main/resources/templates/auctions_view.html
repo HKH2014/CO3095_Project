@@ -4,7 +4,7 @@
       lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
-    <title>Register</title>
+    <title>Auctions</title>
 
 </head>
 
@@ -33,6 +33,7 @@
                             <th>Seller Name</th>
                             <th>Current Price</th>
                             <th>Min Bet</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,6 +46,7 @@
                             <td th:text="${auction.sellerName}"></td>
                             <td th:text="${auction.currentPrice}"></td>
                             <td th:text="${auction.minBet}"></td>
+                            <td><a th:href="@{/auctions/{id}/set-max-bid(id=${auction.id})}" class="btn btn-primary">Bid</a></td>
                         </tr>
                         </tbody>
                     </table>

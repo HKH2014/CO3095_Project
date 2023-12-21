@@ -17,7 +17,7 @@ public class Auction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String name;
     private String description;
@@ -35,16 +35,16 @@ public class Auction {
 
     public double getCurrentPrice() {
         return bids.stream()
-                .map(Bid::getBid)
+                .map(Bid::getCurrentBid)
                 .max((bid1, bid2) -> Comparators.comparable().compare(bid1, bid2))
                 .orElse(basePrice);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 

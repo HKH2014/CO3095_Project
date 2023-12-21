@@ -7,7 +7,7 @@ public class Bid {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "auction_id")
@@ -17,13 +17,15 @@ public class Bid {
     @JoinColumn(name = "bidder_id")
     private User bidder;
 
-    private Double bid;
+    private Double currentBid;
 
-    public int getId() {
+    private Double maxBid;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -43,11 +45,19 @@ public class Bid {
         this.bidder = bidder;
     }
 
-    public Double getBid() {
-        return bid;
+    public Double getCurrentBid() {
+        return currentBid;
     }
 
-    public void setBid(final Double bid) {
-        this.bid = bid;
+    public void setCurrentBid(final Double bid) {
+        this.currentBid = bid;
+    }
+
+    public Double getMaxBid() {
+        return maxBid;
+    }
+
+    public void setMaxBid(final Double maxBid) {
+        this.maxBid = maxBid;
     }
 }

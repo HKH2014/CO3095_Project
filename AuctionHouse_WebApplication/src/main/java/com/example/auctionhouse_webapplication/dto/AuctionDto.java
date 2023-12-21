@@ -2,7 +2,7 @@ package com.example.auctionhouse_webapplication.dto;
 
 public class AuctionDto {
 
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private String endDate;
@@ -10,11 +10,11 @@ public class AuctionDto {
     private Double currentPrice;
     private Double minBet;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 

@@ -1,32 +1,19 @@
 package com.example.auctionhouse_webapplication.service;
 
-import com.example.auctionhouse_webapplication.dto.BidDto;
-import com.example.auctionhouse_webapplication.error.EntityNotFoundException;
-import com.example.auctionhouse_webapplication.error.InvalidBidException;
-import com.example.auctionhouse_webapplication.model.Bid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.auctionhouse_webapplication.dto.AuctionDto;
+import com.example.auctionhouse_webapplication.dto.BidDto;
 import com.example.auctionhouse_webapplication.dto.NewAuctionDto;
+import com.example.auctionhouse_webapplication.error.EntityNotFoundException;
 import com.example.auctionhouse_webapplication.error.InvalidAuctionParametersException;
+import com.example.auctionhouse_webapplication.error.InvalidBidException;
 import com.example.auctionhouse_webapplication.model.Auction;
+import com.example.auctionhouse_webapplication.model.Bid;
 import com.example.auctionhouse_webapplication.model.User;
 import com.example.auctionhouse_webapplication.repo.AuctionRepository;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.BeanUtils;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.BeanUtils;
+import com.example.auctionhouse_webapplication.repo.BidRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -36,10 +23,12 @@ public class AuctionService {
 
     private final AuctionRepository auctionRepository;
     private final UserService userService;
+    private final BidRepository bidRepository;
 
-    public AuctionService(AuctionRepository auctionRepository, UserService userService) {
+    public AuctionService(AuctionRepository auctionRepository, UserService userService, BidRepository bidRepository) {
         this.auctionRepository = auctionRepository;
         this.userService = userService;
+        this.bidRepository = bidRepository;
     }
 
     @Transactional(readOnly = true)
@@ -80,20 +69,33 @@ public class AuctionService {
     }
 
     @Transactional
-    public void setMaxBid(int auctionId, BidDto bidDto) {
-        Auction auction = auctionRepository.findById(auctionId)
-                .orElseThrow(() -> new EntityNotFoundException("Auction not found"));
+    public void setMaxBid(BidDto bidDto, String username) {
+        final Auction auction = getAuctionOrThrow(bidDto.getAuctionId());
+        final User user = userService.getUserOrThrow(username);
+        final Bid bid = mapToBid(bidDto, auction, user);
 
-        // Sprawdź, czy nowa oferta jest wyższa od aktualnej maksymalnej oferty
-        if (bidDto.getAmount() > auction.getMaxBid()) {
-            // Jeśli tak, ustaw nową ofertę jako maksymalną
-            auction.setMaxBid(bidDto.getBid());
-        } else {
-            // Jeśli nie, rzuć wyjątek
-            throw new InvalidBidException("Bid amount must be higher than the current max bid");
+        bidRepository.save(bid);
+    }
+
+    private Bid mapToBid(final BidDto bidDto, final Auction auction, final User user) {
+        Bid bid = new Bid();
+        bid.setMaxBid(bidDto.getMaxBid());
+        bid.setCurrentBid(calculateCurrentBid(auction, bidDto.getMaxBid()));
+        bid.setAuction(auction);
+        bid.setBidder(user);
+        return bid;
+    }
+
+    private double calculateCurrentBid(final Auction auction, final double maxBid) {
+        final double auctionCurrentPrice = auction.getCurrentPrice();
+        if (auctionCurrentPrice > maxBid) {
+            return maxBid;
         }
+        return Math.min(auctionCurrentPrice + auction.getMinBet(), maxBid);
+    }
 
-        // Zapisz zmiany w aukcji
-        auctionRepository.save(auction);
+    private Auction getAuctionOrThrow(final Long auctionId) {
+        return auctionRepository.findById(auctionId)
+            .orElseThrow(() -> new EntityNotFoundException("Auction not found"));
     }
 }
