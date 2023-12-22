@@ -23,7 +23,7 @@ public class AutoBidder {
 
     @Scheduled(cron = "0/10 * * * * *")
     @Transactional
-    public void test() {
+    public void autoBid() {
         auctionRepository.findAllByEndDateAfter(LocalDate.now())
             .stream()
             .filter(this::doesAuctionRequireBidding)

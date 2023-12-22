@@ -33,7 +33,7 @@ public class AuctionService {
 
     @Transactional(readOnly = true)
     public List<AuctionDto> getAuctions() {
-        return auctionRepository.findAll().stream().map(this::mapToDto).toList();
+        return auctionRepository.findAllByEndDateAfter(LocalDate.now()).stream().map(this::mapToDto).toList();
     }
 
     @Transactional
@@ -71,6 +71,9 @@ public class AuctionService {
     @Transactional
     public void setMaxBid(BidDto bidDto, String username) {
         final Auction auction = getAuctionOrThrow(bidDto.getAuctionId());
+        if (auction.getEndDate().isBefore(LocalDate.now())) {
+            throw new InvalidBidException("Cannot bid on ended auction.");
+        }
         final User user = userService.getUserOrThrow(username);
         final Bid bid = mapToBid(bidDto, auction, user);
 
@@ -88,10 +91,10 @@ public class AuctionService {
 
     private double calculateCurrentBid(final Auction auction, final double maxBid) {
         final double auctionCurrentPrice = auction.getCurrentPrice();
-        if (auctionCurrentPrice > maxBid) {
-            return maxBid;
+        if (auctionCurrentPrice + auction.getMinBet() > maxBid) {
+            throw new InvalidBidException("Bid is too low.");
         }
-        return Math.min(auctionCurrentPrice + auction.getMinBet(), maxBid);
+        return auctionCurrentPrice + auction.getMinBet();
     }
 
     private Auction getAuctionOrThrow(final Long auctionId) {
