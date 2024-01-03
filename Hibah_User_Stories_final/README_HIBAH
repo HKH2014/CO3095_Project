@@ -1,0 +1,14 @@
+This file has:
+
+1. Requested bash script
+2. A script to run if you choose to test out the code yourself
+3. The source files and referenced libraries
+
+The Environment developed started off as IntelliJ and ended with Eclipse during testing - i recommend you use eclipse
+To run the applicaion, you need to run MyApplication.java
+IN DatabaseManager.java, change the nessasary credentials to match your MySQLWorkbench details
+
+All tests and code are in the default package, they are not divided.
+
+Please see the report for documented testing and coverage
+Please see demo if you do not want to test the code yourself
